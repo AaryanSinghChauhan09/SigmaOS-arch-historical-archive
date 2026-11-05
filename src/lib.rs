@@ -7,14 +7,14 @@ use std::fmt;
 
 /// Errors produced by this component. Fail-fast: errors are returned, not panicked.
 #[derive(Debug, Clone, PartialEq, Eq)]
-pub enum Sigmaos_arch_historical_archiveError {
+pub enum ArchHistoricalArchiveError {
     /// The requested operation is not valid in the current state.
     InvalidState,
     /// Input failed validation.
     InvalidInput(String),
 }
 
-impl fmt::Display for Sigmaos_arch_historical_archiveError {
+impl fmt::Display for ArchHistoricalArchiveError {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         match self {
             Self::InvalidState => write!(f, "invalid state"),
@@ -23,20 +23,20 @@ impl fmt::Display for Sigmaos_arch_historical_archiveError {
     }
 }
 
-impl std::error::Error for Sigmaos_arch_historical_archiveError {}
+impl std::error::Error for ArchHistoricalArchiveError {}
 
 /// Core component type. Holds configuration; performs no I/O by default.
 #[derive(Debug, Clone, Default)]
-pub struct Sigmaos_arch_historical_archive {
+pub struct ArchHistoricalArchive {
     name: String,
 }
 
-impl Sigmaos_arch_historical_archive {
+impl ArchHistoricalArchive {
     /// Create a new component instance. Fails fast on empty names.
-    pub fn new(name: impl Into<String>) -> Result<Self, Sigmaos_arch_historical_archiveError> {
+    pub fn new(name: impl Into<String>) -> Result<Self, ArchHistoricalArchiveError> {
         let name = name.into();
         if name.trim().is_empty() {
-            return Err(Sigmaos_arch_historical_archiveError::InvalidInput("name must not be empty".into()));
+            return Err(ArchHistoricalArchiveError::InvalidInput("name must not be empty".into()));
         }
         Ok(Self { name })
     }
@@ -47,9 +47,9 @@ impl Sigmaos_arch_historical_archive {
     }
 
     /// Perform the component's primary action. Returns a deterministic result.
-    pub fn run(&self) -> Result<String, Sigmaos_arch_historical_archiveError> {
+    pub fn run(&self) -> Result<String, ArchHistoricalArchiveError> {
         if self.name.is_empty() {
-            return Err(Sigmaos_arch_historical_archiveError::InvalidState);
+            return Err(ArchHistoricalArchiveError::InvalidState);
         }
         Ok(format!("{}: ok", self.name))
     }
@@ -62,18 +62,18 @@ mod tests {
     #[test]
     fn new_rejects_empty_name() {
         // Arrange / Act / Assert
-        assert!(matches!(Sigmaos_arch_historical_archive::new("  "), Err(Sigmaos_arch_historical_archiveError::InvalidInput(_))));
+        assert!(matches!(ArchHistoricalArchive::new("  "), Err(ArchHistoricalArchiveError::InvalidInput(_))));
     }
 
     #[test]
     fn run_returns_deterministic_result() {
-        let c = Sigmaos_arch_historical_archive::new("test").unwrap();
+        let c = ArchHistoricalArchive::new("test").unwrap();
         assert_eq!(c.run().unwrap(), "test: ok");
     }
 
     #[test]
     fn name_is_accessible() {
-        let c = Sigmaos_arch_historical_archive::new("abc").unwrap();
+        let c = ArchHistoricalArchive::new("abc").unwrap();
         assert_eq!(c.name(), "abc");
     }
 }
