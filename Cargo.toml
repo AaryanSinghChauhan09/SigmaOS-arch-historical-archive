@@ -1,0 +1,8 @@
+[package]
+name = "sigmaos-arch-historical-archive"
+version = "0.1.0"
+edition = "2021"
+license = "MIT"
+description = "Historical package archive publisher — SigmaOS component inspired by Arch Linux infrastructure."
+
+[dependencies]
