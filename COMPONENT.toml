@@ -3,7 +3,7 @@ name = "SigmaOS-arch-historical-archive"
 tier = 2
 stability = "scaffold"
 language = "rust"
-description = "arch-historical-archive component"
+description = "SigmaOS arch-historical-archive component (Arch Linux inspired)"
 upstream = []
 
 [contract]
