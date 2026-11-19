@@ -1,8 +1,15 @@
 [package]
-name = "sigmaos-arch-historical-archive"
+name = "SigmaOS-arch-historical-archive"
 version = "0.1.0"
 edition = "2021"
-license = "MIT"
-description = "Historical package archive publisher — SigmaOS component inspired by Arch Linux infrastructure."
+license = "Apache-2.0"
+description = "SigmaOS arch_historical_archive component"
+
+[lib]
+name = "arch_historical_archive"
+path = "src/lib.rs"
 
 [dependencies]
+thiserror = "1"
+
+[dev-dependencies]
